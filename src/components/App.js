@@ -9,22 +9,18 @@ function App() {
   const [weather, setWeather] = useState('')
   const [responseCode, setResponseCode] = useState('')
   const onSearch = event => {
-    if (event.key === 'Enter' && query) {
-      fetch(`${api.base}q=${query}&units=metric&appid=${api.apiKey}`)
-        .then(response => response.json())
-        .then(result => {
-          if (result.cod === '404') {
-            setResponseCode(404)
-          } else {
-            setResponseCode(200)
-            setWeather(result)
-            setQuery('')
-          }
-        })
+    if (event.key === 'Enter' && query) api.fetch(query, setQuery, setResponseCode, setWeather)
+  }
+  function cls() {
+    if (weather) {
+      if (weather.main.temp >= 16) return 'app'
+      if (weather.main.temp < 16 && weather.main.temp > 0) return 'app cold'
+      if (weather.main.temp <= 0) return 'app very-cold'
     }
+    return 'app'
   }
   return (
-    <div className='app'>
+    <div className={cls()}>
       <div className='app__inner'>
         <SearchInput searchHandler={onSearch} inputValue={query} setQuery={setQuery} />
         {responseCode === 200 && weather

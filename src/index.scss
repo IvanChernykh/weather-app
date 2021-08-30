@@ -6,10 +6,19 @@
 body {
   font-family: Arial, sans-serif;
 }
-
 .app {
-  background: url("./assets/warm-bg.webp") no-repeat center center;
+  position: relative;
   background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  transition: background-image 0.5s;
+  background-image: url("./assets/warm-bg.webp");
+  &.cold {
+    background-image: url("./assets/cold-bg.webp");
+  }
+  &.very-cold {
+    background-image: url("./assets/very-cold-bg.webp");
+  }
 }
 .app__inner {
   min-height: 100vh;
@@ -79,6 +88,7 @@ body {
   font-weight: 700;
   text-align: center;
 }
+
 @media (max-width: 480px) {
   .search__input {
     margin: 0 auto 4rem;
