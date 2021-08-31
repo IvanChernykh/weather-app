@@ -1,6 +1,6 @@
 export const api = {
     apiKey: process.env.REACT_APP_API_KEY,
-    base: 'https://api.openweathermap.org/data/2.5/weather?',
+    base: process.env.REACT_APP_BASE_URL,
     fetch(query, setQuery, setResponseCode, setWeather) {
         fetch(`${api.base}q=${query.trim()}&units=metric&appid=${api.apiKey}`)
             .then(response => response.json())
